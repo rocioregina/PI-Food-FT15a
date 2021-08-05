@@ -80,7 +80,6 @@ router.get("/recipes/:id", async function(req, res, next){
         }
         return res.json(recipe);
       }
-      // return res.status(404).json('Enter a valid id');
     catch(err){
       next(err);
     }
@@ -109,16 +108,16 @@ router.post("/recipe", async function(req, res, next){
       title,
       summary,
       spoonacularScore
-      // healthScore,
-      // analyzedInstructions,
-      // image
+      healthScore,
+      analyzedInstructions,
+      image
       }
     });
     // console.log(diets);
     const die = await funcion(diets);
     // console.log(recipeCreated);
     await recipeCreated[0].setDiets(die);
-    res.json("Recipe uploaded.");
+    res.json({msg: "Recipe uploaded."});
   }
   catch(err){
     next(err);
