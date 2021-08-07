@@ -6,13 +6,13 @@ import { getRecipes } from '../../actions/index.js';
 import Recipe from "../Recipe/Recipe.js";
 
 export function Recipes(props){
-  console.log(props);
+  // console.log(props);
   const dispatch = useDispatch();
   useEffect(() => {
     props.getRecipes();
   }, [])
   //props.getRecipes();
-  console.log(props.recipes[0]);
+  // console.log(props.recipes[0]);
   return (
     <div>
       {props.recipes && props.recipes.map((recipe) =>
