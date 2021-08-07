@@ -15,11 +15,15 @@ const router = Router();
 // Ejemplo: router.use('/auth', authRouter);
 
 //------------------------------FUNCTIONS-----------------------------------
-const getApiInfo = async () => {
-  const responseApi = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true`);
-  const recipesAPI = responseApi.data.results.filter(recipe => {
+const getApiInfo = async (name) => {
+  const responseApi = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`);
+  var recipesAPI = responseApi.data.results;
+  if(name){ //if a name is received
+    recipesAPI = recipesAPI.filter(recipe => {  //filter recipes by name
     return recipe.title.toUpperCase().includes(name.toUpperCase());
-  });
+    });
+  }
+  //keeping needed props only
   recipesAPI = recipesAPI.map((r) => {
       return{
           title: r.title,
@@ -34,25 +38,33 @@ const getApiInfo = async () => {
   return recipesAPI;
 }
 
-const getDbInfo = async () => {
+const getDbRecipesName = async (name) => {
   return await Recipe.findAll({
     where: {
-      //verifico que name este contenido en el nombre
+      //verifying that the name is included in the title
         title: {[Op.like]: `%${name}%`}
     }
   });
+}
+
+const getDbRecipes = async () => {
+  return await Recipe.findAll();
 }
 //------------------------------ROUTES--------------------------------------
 //GET /recipes?name="..."
 router.get("/recipes", async function(req, res, next){
     try{
-      const {name} = req.query;
-      if(name){
-        const recipesDB = await getDbInfo();  //recupero recetas de la base de datos
-        const recipesAPI = await getApiInfo();  //recupero recetas de la api
-        return res.json(recipesAPI.concat(recipesDB));  //retorno ambos resultados
+      var {name} = req.query;
+      var recipesDB;
+      var recipesAPI = await getApiInfo(name);  //gets api recipes
+      if(name !== undefined){
+        recipesDB = await getDbRecipesName(name);  //gets db recipes by name
       }
-      return res.status(404).json('Enter a valid name');
+      if(name === undefined){
+        recipesDB = await getDbRecipes();  //if name is undefined, gets all db recipes
+      }
+      return res.json(recipesAPI.concat(recipesDB) ? recipesAPI.concat(recipesDB) : []);  //joins both arrays and returns them
+      // return res.status(404).json([]);
     }
     catch(err){
       next(err);
@@ -117,9 +129,9 @@ router.post("/recipe", async function(req, res, next){
       title,
       summary,
       spoonacularScore,
-      // healthScore,
-      // analyzedInstructions,
-      // image
+      healthScore,
+      analyzedInstructions,
+      image
       }
     });
     // console.log(diets);
