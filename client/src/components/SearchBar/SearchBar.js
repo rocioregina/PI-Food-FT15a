@@ -1,20 +1,14 @@
 import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { getRecipes } from '../../actions/index.js';
 
-export default function SearchBar(){
+export function SearchBar(props){
   const [recipe, setRecipe] = React.useState("");
-
-  // useEffect(() => {
-  //
-  // })
-
-  function onSearch(){
-    //llamado a la api? renderizado de resultados de busqueda?
-  }
 
   return (
     <form onSubmit={(e) => {
       e.preventDefault();
-      // onSearch(recipe);
+      props.getRecipes(recipe);
     }}>
       <input
           type="text"
@@ -26,3 +20,14 @@ export default function SearchBar(){
     </form>
   )
 }
+
+function mapDispatchToProps(dispatch){
+  return {
+    getRecipes: recipe => dispatch(getRecipes(recipe))
+  }
+}
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(SearchBar);

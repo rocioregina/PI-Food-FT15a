@@ -2,12 +2,8 @@ import React from "react";
 
 import { addRecipe } from "../../actions/index.js";
 import { connect } from "react-redux";
-import axios from 'axios';
 
-require('dotenv').config();
-const {PORT} = process.env;
-
-export default function Create(props){
+export function Create(props){
   const [state, setState] = React.useState({
     title: '',
     summary: '',
@@ -25,7 +21,7 @@ export default function Create(props){
   }
 
   const handleSubmit = async function(data){
-    let post = await axios.post(`https://localhost:3001/recipes`, data);
+    let post = await addRecipe(data);
     alert(post.data.msg);
   }
 
@@ -48,13 +44,13 @@ export default function Create(props){
   )
 };
 
-// function mapDispatchToProps(dispatch){
-//   return {
-//     addRecipe: recipe => dispatch(addRecipe(recipe))
-//   }
-// }
-//
-// export default connect(
-//   null,
-//   mapDispatchToProps
-// )(AddRecipe);
+function mapDispatchToProps(dispatch){
+  return {
+    addRecipe: recipe => dispatch(addRecipe(recipe))
+  }
+}
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Create);

@@ -1,5 +1,5 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 import NavBar from "./components/NavBar/NavBar.js";
 import Home from "./components/Home/Home.js";
@@ -10,16 +10,13 @@ import './App.css';
 
 function App() {
   return (
-    // <div className="App">
-    //   <h1>Henry Food</h1>
-    // </div>
-    <div>
+      <div>
         <Route path="/" component={NavBar}/>
         <Route exact path="/" component={Home}/>
         <Route exact path="/recipes" component={Principal}/>
         <Route exact path="/recipes/:id" component={Detail}/>
         <Route exact path="/recipe" component={Create}/>
-    </div>
+      </div>
   );
 }
 
