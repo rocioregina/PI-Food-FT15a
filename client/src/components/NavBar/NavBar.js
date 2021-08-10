@@ -11,9 +11,9 @@ export default function NavBar(){
       <Link to='/recipes'>
         <span>Recipes</span>
       </Link>
-      // <Link to='/favorites'>
-      //   <span>Favorites</span>
-      // </Link>
+      <Link to='/'>
+        <span>Favorites</span>
+      </Link>
       <Link to='/recipe'>
         <span>Create Recipe</span>
       </Link>

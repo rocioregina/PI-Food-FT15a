@@ -1,12 +1,12 @@
 const initialState = {
   recipesLoaded: [],
+  dietsLoaded: [],
   recipeDetail: {}
 };
 
 export default function rootReducer(state = initialState, action){
   switch(action.type){
     case "GET_RECIPES":
-      console.log(action.payload);
       return {
         ...state,
         recipesLoaded: action.payload //returns searched recipes.. from local host
@@ -21,10 +21,11 @@ export default function rootReducer(state = initialState, action){
         ...state,
         recipesLoaded: action.payload
       }
-    // case "GET_DIETS":
-    //   return {
-    //
-    //   }
+    case "GET_DIETS":
+      return {
+        ...state,
+        dietsLoaded: action.payload
+      }
     default: return state
   }
 }
