@@ -46,6 +46,20 @@ export function getDiets(){
   }
 }
 
+export function setRecipeFilter(filter){
+  return {
+      type: "SET_FILTER",
+      payload: filter
+    }
+}
+
+export function setRecipeOrder(order){
+  return {
+      type: "SET_ORDER",
+      payload: order
+  }
+}
+
 // export function addRecipeFavorite(payload){
 //   return {type: "ADD_RECIPE_FAVORITE", payload: payload};
 // }

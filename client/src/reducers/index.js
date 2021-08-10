@@ -1,7 +1,9 @@
 const initialState = {
   recipesLoaded: [],
   dietsLoaded: [],
-  recipeDetail: {}
+  recipeDetail: {},
+  filter: "",
+  order: ""
 };
 
 export default function rootReducer(state = initialState, action){
@@ -25,6 +27,17 @@ export default function rootReducer(state = initialState, action){
       return {
         ...state,
         dietsLoaded: action.payload
+      }
+    case "SET_FILTER":
+      var filtrado = state.recipesLoaded
+      return {
+        ...state,
+        filter: action.payload
+      }
+    case "SET_ORDER":
+      return {
+        ...state,
+        order: action.payload
       }
     default: return state
   }

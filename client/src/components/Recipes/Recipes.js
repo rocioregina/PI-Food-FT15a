@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import { Link } from "react-router-dom";
 import { connect, useDispatch } from "react-redux";
-import { getRecipes, getDiets } from '../../actions/index.js';
+import { getRecipes, getDiets, getRecipeDetail } from '../../actions/index.js';
 
 import Recipe from "../Recipe/Recipe.js";
 
@@ -35,9 +35,13 @@ export function Recipes(props){
 
   useEffect(() => { //sorts recipes by order value
     if(state.order === "alph-asc"){ //to complete
-      props.recipes = props.recipes.sort(function (a, b) {
-        return a.title.localCompare(b.title) ? 1 : -1
+      props.recipes.sort(function (a, b) {
+        // return a.title.localCompare(b.title) ? 1 : -1
+        if(a.title > b.title) return 1
+        if(a.title < b.title) return -1
+        return 0;
       })
+      // dispatch(getRecipes(arrayAZ));
     }
   }, [state.order])
 
@@ -46,6 +50,10 @@ export function Recipes(props){
       ...state,
       [e.target.name] : e.target.value
     });
+  }
+
+  function onClick(id){
+    props.getRecipeDetail(id)
   }
 
   return (
@@ -68,17 +76,17 @@ export function Recipes(props){
         <select name="order" defaultValue="see-all"
             value={state.order} onChange={(e) => handleInputChange(e)}>
           <option value="see-all">See all</option>
-          <option value="score-asc">Score(asc)</option>
-          <option value="score-desc">Score(desc)</option>
-          <option value="alph-asc">Alphabetical(asc)</option>
-          <option value="alph-desc">Alphabetical(desc)</option>
+          <option value="score-asc">Lowest Score</option>
+          <option value="score-desc">Higher Score</option>
+          <option value="alph-asc">A-Z</option>
+          <option value="alph-desc">Z-A</option>
         </select>
       </div>
 
       <div>
         {subArray && subArray.map((recipe) =>
         <Link to={`/recipes/${recipe.id}`}>
-          <Recipe props={recipe}/>
+          <Recipe props={recipe} onClick={() => onClick(recipe.id)}/>
         </Link>
         )}
       </div>
@@ -100,7 +108,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch){
   return {
     getRecipes: () => dispatch(getRecipes()),
-    getDiets: () => dispatch(getDiets())
+    getDiets: () => dispatch(getDiets()),
+    getRecipeDetail: () => dispatch(getRecipeDetail())
   }
 }
 

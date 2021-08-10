@@ -1,7 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { useState, useDispatch } from "react-redux";
-import { getRecipes } from "../../actions/index.js";
+// import { Link } from "react-router-dom";
+// import { useState, useDispatch } from "react-redux";
+// import { getRecipes } from "../../actions/index.js";
 
 import SearchBar from '../SearchBar/SearchBar.js';
 import Recipes from '../Recipes/Recipes.js';
