@@ -8,7 +8,7 @@ const { v4: uuidv4 } = require('uuid');
 
 //importo la apikey
 require('dotenv').config();
-const {API_KEY_2} = process.env;
+const {API_KEY_4} = process.env;
 
 const router = Router();
 // Configurar los routers
@@ -16,7 +16,7 @@ const router = Router();
 
 //------------------------------FUNCTIONS-----------------------------------
 const getApiInfo = async (name) => {
-  const responseApi = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY_2}&addRecipeInformation=true&number=100`);
+  const responseApi = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY_4}&addRecipeInformation=true&number=100`);
   var recipesAPI = responseApi.data.results;
   if(name){ //if a name is received
     recipesAPI = recipesAPI.filter(recipe => {  //filter recipes by name
@@ -89,7 +89,7 @@ router.get("/recipes/:id", async function(req, res, next){
         return res.json(recipe);
       }
         //si no la encontre en la db, busco en la api
-        const recipeAPI = await axios.get(`https://api.spoonacular.com/recipes/${id}/information?${API_KEY_2}`);
+        const recipeAPI = await axios.get(`https://api.spoonacular.com/recipes/${id}/information?${API_KEY_4}`);
         recipe = {
             title: recipeAPI.data.title,
             summary: recipeAPI.data.summary,

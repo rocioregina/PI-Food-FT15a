@@ -1,7 +1,6 @@
 import React from "react";
 
 export default function Recipe({props}){
-  console.log(props.dietss)
   return (
     <div>
       <h3>{props.title}</h3>

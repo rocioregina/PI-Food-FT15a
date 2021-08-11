@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import { Link } from "react-router-dom";
-import { connect, useDispatch } from "react-redux";
-import { getRecipes, getDiets, getRecipeDetail } from '../../actions/index.js';
+import { connect, useDispatch, useSelector } from "react-redux";
+import { getRecipes, getDiets, getRecipeDetail, setRecipeOrder } from '../../actions/index.js';
 
 import Recipe from "../Recipe/Recipe.js";
 
@@ -15,35 +15,25 @@ export function Recipes(props){
   const [subArray, setSubArray] = React.useState([]);
 
   const dispatch = useDispatch();
-  useEffect(() => { //loads recipes and diets when component mounts
-    props.getRecipes();
-    props.getDiets();
-  }, [])
+  const recipes = useSelector((state) => state.recipesLoaded);
 
-  useEffect(() => { //gets button quantity
-    var array = [];
-    var top = Math.ceil(props.recipes.length/9);
-    for(let i=0; i < top; i++){
-      array.push(i+1);
-    }
-    setButtons(array)
-  }, [props.recipes])
+  function orderBy(order){
+    console.log(order);
+    setState({
+      ...state,
+      order: order
+    })
+    dispatch(setRecipeOrder(order));
+  }
 
-  useEffect(() => { //gets a subarray of recipes depending on the numeric button selected
-    setSubArray(props.recipes.slice(9*state.num-9, 9*state.num))
-  }, [state.num, props.recipes])
-
-  useEffect(() => { //sorts recipes by order value
-    if(state.order === "alph-asc"){ //to complete
-      props.recipes.sort(function (a, b) {
-        // return a.title.localCompare(b.title) ? 1 : -1
-        if(a.title > b.title) return 1
-        if(a.title < b.title) return -1
-        return 0;
-      })
-      // dispatch(getRecipes(arrayAZ));
-    }
-  }, [state.order])
+  function filterBy(filter){
+    console.log(filter);
+    setState({
+      ...state,
+      filter: filter
+    })
+    //dispatch
+  }
 
   function handleInputChange(e){
     setState({
@@ -53,8 +43,27 @@ export function Recipes(props){
   }
 
   function onClick(id){
-    props.getRecipeDetail(id)
+    dispatch(getRecipeDetail(id));
   }
+
+  useEffect(() => { //loads recipes and diets when component mounts
+    props.getRecipes();
+    props.getDiets();
+  }, [])
+
+  useEffect(() => { //gets button quantity
+    var array = [];
+    var top = Math.ceil(recipes.length/9);
+    for(let i=0; i < top; i++){
+      array.push(i+1);
+    }
+    setButtons(array)
+  }, [recipes])
+
+  useEffect(() => {
+    setSubArray(recipes.slice(9*state.num-9, 9*state.num))
+    console.log(recipes)
+  }, [recipes, state])
 
   return (
     <div>
@@ -64,7 +73,7 @@ export function Recipes(props){
           name="filter"
           defaultValue="see-all"
           value={state.filter}
-          onChange={(e) => handleInputChange(e)}>
+          onChange={(e) => filterBy(e.target.value)}>
           {props.diets.map((diet) =>
             {return <option value={diet.name}>{diet.name}</option>}
           )}
@@ -73,8 +82,8 @@ export function Recipes(props){
 
       <div>
         <span>Order by:</span>
-        <select name="order" defaultValue="see-all"
-            value={state.order} onChange={(e) => handleInputChange(e)}>
+        <select name="order"
+            value={state.order} onChange={(e) => orderBy(e.target.value)}>
           <option value="see-all">See all</option>
           <option value="score-asc">Lowest Score</option>
           <option value="score-desc">Higher Score</option>
@@ -92,7 +101,9 @@ export function Recipes(props){
       </div>
 
       <div>
+        <button name="ant">Prev</button>
         {buttons.map((num) => {return <button name="num" value={num} onClick={(e) => handleInputChange(e)}>{num}</button>})}
+        <button name="sig">Next</button>
       </div>
     </div>
   )
