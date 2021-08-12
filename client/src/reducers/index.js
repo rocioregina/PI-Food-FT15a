@@ -1,7 +1,9 @@
 const initialState = {
   recipesLoaded: [],
+  recipesRender: [],
   dietsLoaded: [],
-  recipeDetail: {}
+  recipeDetail: {},
+  postedRecipe: {default: true}
 };
 
 export default function rootReducer(state = initialState, action){
@@ -9,7 +11,8 @@ export default function rootReducer(state = initialState, action){
     case "GET_RECIPES":
       return {
         ...state,
-        recipesLoaded: action.payload //returns searched recipes.. from local host
+        recipesLoaded: action.payload, //returns searched recipes.. from local host
+        recipesRender: action.payload
       }
     case "GET_RECIPE_DETAIL":
       return {
@@ -19,7 +22,7 @@ export default function rootReducer(state = initialState, action){
     case "ADD_RECIPE":
       return {
         ...state,
-        recipesLoaded: action.payload
+        postedRecipe: action.payload
       }
     case "GET_DIETS":
       return {
@@ -27,13 +30,23 @@ export default function rootReducer(state = initialState, action){
         dietsLoaded: action.payload
       }
     case "SET_FILTER":
-      var filteredRecipes = []
+      if(action.payload === "see-all"){
+        return {
+          ...state,
+          recipesRender: state.recipesLoaded
+        }
+      }
+      console.log(action.payload)
       return {
         ...state,
-        filter: action.payload
+        recipesRender: state.recipesLoaded.filter((recipe) => {
+          console.log(recipe.diets.includes(action.payload), "1020012")
+          console.log(recipe.diets)
+          return recipe.diets.includes(action.payload)
+        })
       }
     case "SET_ORDER":
-      var orderedRecipes = state.recipesLoaded;
+      var orderedRecipes = state.recipesRender;
       if(action.payload === "see-all"){orderedRecipes.sort((a, b) => {
         if(a.id > b.id)return 1;
         if(a.id < b.id)return -1;
@@ -61,7 +74,7 @@ export default function rootReducer(state = initialState, action){
       })} //sorts by title from z to a
       return {
         ...state,
-        recipesLoaded: orderedRecipes
+        recipesRender: orderedRecipes
       }
     default: return state
   }

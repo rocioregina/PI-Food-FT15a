@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import { Link } from "react-router-dom";
 import { connect, useDispatch, useSelector } from "react-redux";
-import { getRecipes, getDiets, getRecipeDetail, setRecipeOrder } from '../../actions/index.js';
+import { getRecipes, getDiets, getRecipeDetail, setRecipeOrder, setRecipeFilter } from '../../actions/index.js';
 
 import Recipe from "../Recipe/Recipe.js";
 
@@ -15,9 +15,9 @@ export function Recipes(props){
   const [subArray, setSubArray] = React.useState([]);
 
   const dispatch = useDispatch();
-  const recipes = useSelector((state) => state.recipesLoaded);
+  const recipes = useSelector((state) => state.recipesRender);
 
-  function orderBy(order){
+  function orderBy(order){ //dispatches an action that sorts recipes from the global state
     console.log(order);
     setState({
       ...state,
@@ -25,14 +25,16 @@ export function Recipes(props){
     })
     dispatch(setRecipeOrder(order));
   }
-
-  function filterBy(filter){
+  //Vegetarian --> vegetarian
+  function filterBy(filter){  //dispatches an action that filters recipes from the global state
+    var filterLower = filter.toLowerCase().replaceAll('_', ' ') //could use split + join since it's not a critic performance case
     console.log(filter);
+    console.log(filterLower);
     setState({
       ...state,
       filter: filter
     })
-    //dispatch
+    dispatch(setRecipeFilter(filterLower));
   }
 
   function handleInputChange(e){
@@ -51,7 +53,7 @@ export function Recipes(props){
     props.getDiets();
   }, [])
 
-  useEffect(() => { //gets button quantity
+  useEffect(() => { //gets numeric button quantity
     var array = [];
     var top = Math.ceil(recipes.length/9);
     for(let i=0; i < top; i++){
@@ -60,7 +62,7 @@ export function Recipes(props){
     setButtons(array)
   }, [recipes])
 
-  useEffect(() => {
+  useEffect(() => { //filters a subArray to be rendered depending on the numeric button selected
     setSubArray(recipes.slice(9*state.num-9, 9*state.num))
     console.log(recipes)
   }, [recipes, state])

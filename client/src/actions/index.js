@@ -18,7 +18,7 @@ export function getRecipes(name){
 
 export function getRecipeDetail(id){
   return async function(dispatch){
-    var json = await axios.get(`http://localhost:3001/recipes${id}`);
+    var json = await axios.get(`http://localhost:3001/recipes/${id}`);
     return dispatch({
       type: "GET_RECIPE_DETAIL",
       payload: json.data
@@ -28,10 +28,16 @@ export function getRecipeDetail(id){
 
 export function addRecipe(recipe){
   return async function(dispatch){
-    axios.post(`http://localhost:3001/recipe`, recipe);
+    if(!recipe){
+      return dispatch({
+        type: "ADD_RECIPE",
+        payload: {default: true}
+      })
+    }
+    var res = await axios.post(`http://localhost:3001/recipe`, recipe);
     return dispatch({
       type: "ADD_RECIPE",
-      payload: recipe
+      payload: res.data
     })
   }
 }
