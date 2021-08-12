@@ -26,11 +26,10 @@ require('dotenv').config();
 const {PORT} = process.env;
 
 //arreglo de tipos de dietas --> descomentar para pre-cargar
-var diets = ['See All', 'Gluten Free', 'Ketogenic', 'Vegetarian', 'Lacto Vegetarian',
-'Ovo Vegetarian', 'Vegan', 'Pescetarian', 'Paleo', 'Primal', 'Whole 30'];
+var diets = ['See All', 'Gluten Free', 'Dairy Free', 'Ketogenic', 'Lacto Ovo Vegetarian', 'Vegan', 'Pescatarian', 'Paleolithic', 'Primal', 'Whole 30', 'FODMAP Friendly'];
 
 // Syncing all the models at once.
-conn.sync({force: false}).then(() => {  //le quite el force: true
+conn.sync({force: true}).then(() => {  //le quite el force: true
   server.listen(PORT, () => {
     //axios.get(`${ro}complexSearch?${apiKey}${flag}`);
     //podria usar un bulkCreate pero hago un map donde convierto los strings a objetos

@@ -8,7 +8,7 @@ const { v4: uuidv4 } = require('uuid');
 
 //importo la apikey
 require('dotenv').config();
-const {API_KEY_4} = process.env;
+const {API_KEY_1} = process.env;
 
 const router = Router();
 // Configurar los routers
@@ -16,7 +16,7 @@ const router = Router();
 
 //------------------------------FUNCTIONS-----------------------------------
 const getApiInfo = async (name) => {
-  const responseApi = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY_4}&addRecipeInformation=true&number=100`);
+  const responseApi = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY_1}&addRecipeInformation=true&number=100`);
   var recipesAPI = responseApi.data.results;
   if(name){ //if a name is received
     recipesAPI = recipesAPI.filter(recipe => {  //filter recipes by name
@@ -26,13 +26,14 @@ const getApiInfo = async (name) => {
   //keeping needed props only
   recipesAPI = recipesAPI.map((r) => {
       return{
+          id: r.id,
           title: r.title,
           summary: r.summary,
           spoonacularScore: r.spoonacularScore,
           healthScore: r.healthScore,
           analyzedInstructions: r.analyzedInstructions,
           image: r.image,
-          dietss: r.diets.map(e => e)
+          diets: r.diets.map(e => e)
       };
   });
   return recipesAPI;
@@ -89,15 +90,16 @@ router.get("/recipes/:id", async function(req, res, next){
         return res.json(recipe);
       }
         //si no la encontre en la db, busco en la api
-        const recipeAPI = await axios.get(`https://api.spoonacular.com/recipes/${id}/information?${API_KEY_4}`);
+        const recipeAPI = await axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY_1}`);
         recipe = {
+            id: recipeAPI.data.id,
             title: recipeAPI.data.title,
             summary: recipeAPI.data.summary,
             spoonacularScore: recipeAPI.data.spoonacularScore,
             healthScore: recipeAPI.data.healthScore,
             analyzedInstructions: recipeAPI.data.analyzedInstructions,
             image: recipeAPI.data.image,
-            dietss: recipeAPI.data.diets
+            diets: recipeAPI.data.diets
         }
         return res.json(recipe);
       }
@@ -138,7 +140,7 @@ router.post("/recipe", async function(req, res, next){
     const dietsFound = await getMatchingDiets(diets);
     // console.log(recipeCreated);
     await recipeCreated[0].setDiets(dietsFound);
-    res.json({msg: "Recipe uploaded."});
+    res.json({msg: true, obj: recipeCreated});
   }
   catch(err){
     next(err);
