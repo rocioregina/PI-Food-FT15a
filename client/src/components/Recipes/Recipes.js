@@ -95,11 +95,11 @@ export function Recipes(props){
       </div>
 
       <div>
-        {subArray && subArray.map((recipe) =>
+        {subArray.length!==0 ? subArray.map((recipe) =>
         <Link to={`/recipes/${recipe.id}`}>
           <Recipe props={recipe} onClick={() => onClick(recipe.id)}/>
         </Link>
-        )}
+      ) : <p>Recipes not found.</p>}
       </div>
 
       <div>

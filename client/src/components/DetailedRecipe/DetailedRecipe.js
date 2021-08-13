@@ -14,6 +14,8 @@ export default function DetailedRecipe({props}){
       <h4>{props.title}</h4>
       <img src={props.image}/>
       <p id='summary'></p>
+      <h2>{props.spoonacularScore}</h2>
+      <h2>{props.healthScore}</h2>
     </div>
   )
 }

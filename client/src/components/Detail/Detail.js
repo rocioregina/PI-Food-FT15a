@@ -3,7 +3,7 @@ import React from "react";
 import { useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getRecipeDetail } from "../../actions/index.js";
-import DetailedRecipe from "../DetailedRecipe/DetailedRecipe.js";
+// import DetailedRecipe from "../DetailedRecipe/DetailedRecipe.js";
 
 export default function Detail(props){
   const dispatch = useDispatch();
@@ -11,13 +11,25 @@ export default function Detail(props){
   // const matchRecipe = useRef(match.params.id);
 
   useEffect(() => {
-    console.log(props.match.params.id)
     dispatch(getRecipeDetail(props.match.params.id));
   }, [])
 
+  useEffect(() => {
+    document.querySelector("#summary").innerHTML = recipe.summary
+    console.log(recipe.diets)
+  }, [recipe])
+
   return (
     <div>
-      <DetailedRecipe props={recipe}/>
+      <h4>{recipe.title}</h4>
+      <img src={recipe.image}/>
+      <p id='summary'></p>
+      <h2>{recipe.spoonacularScore}</h2>
+      <h2>{recipe.healthScore}</h2>
+      {recipe.diets.length!==0 && recipe.diets.map((diet) => {
+        console.log(diet)
+        return <p>{diet}</p>
+      })}
     </div>
   )
 }

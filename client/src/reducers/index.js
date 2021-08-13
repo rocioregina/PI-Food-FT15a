@@ -30,21 +30,25 @@ export default function rootReducer(state = initialState, action){
         dietsLoaded: action.payload
       }
     case "SET_FILTER":
-      if(action.payload === "see-all"){
+      if(action.payload === "see all"){
+        var aux = state.recipesLoaded
+        console.log(action.payload)
         return {
           ...state,
-          recipesRender: state.recipesLoaded
+          recipesRender: aux
         }
-      }
+      }else{
       console.log(action.payload)
       return {
         ...state,
         recipesRender: state.recipesLoaded.filter((recipe) => {
+
           console.log(recipe.diets.includes(action.payload), "1020012")
           console.log(recipe.diets)
           return recipe.diets.includes(action.payload)
         })
       }
+    }
     case "SET_ORDER":
       var orderedRecipes = state.recipesRender;
       if(action.payload === "see-all"){orderedRecipes.sort((a, b) => {
