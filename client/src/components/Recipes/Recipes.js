@@ -4,6 +4,7 @@ import { connect, useDispatch, useSelector } from "react-redux";
 import { getRecipes, getDiets, getRecipeDetail, setRecipeOrder, setRecipeFilter } from '../../actions/index.js';
 
 import Recipe from "../Recipe/Recipe.js";
+import './Recipes.css';
 
 export function Recipes(props){
   const [state, setState] = React.useState({
@@ -68,8 +69,8 @@ export function Recipes(props){
   }, [recipes, state])
 
   return (
-    <div>
-      <div>
+    <div className='all'>
+      <div className='filter'>
         <span>Filter by:</span>
         <select
           name="filter"
@@ -82,7 +83,7 @@ export function Recipes(props){
         </select>
       </div>
 
-      <div>
+      <div className='order'>
         <span>Order by:</span>
         <select name="order"
             value={state.order} onChange={(e) => orderBy(e.target.value)}>
@@ -94,7 +95,7 @@ export function Recipes(props){
         </select>
       </div>
 
-      <div>
+      <div className='recipes'>
         {subArray.length!==0 ? subArray.map((recipe) =>
         <Link to={`/recipes/${recipe.id}`}>
           <Recipe props={recipe} onClick={() => onClick(recipe.id)}/>
@@ -102,7 +103,7 @@ export function Recipes(props){
       ) : <p>Recipes not found.</p>}
       </div>
 
-      <div>
+      <div className='paginate'>
         <button name="ant">Prev</button>
         {buttons.map((num) => {return <button name="num" value={num} onClick={(e) => handleInputChange(e)}>{num}</button>})}
         <button name="sig">Next</button>

@@ -1,0 +1,18 @@
+.all {
+  background-color: #fdffeb;
+}
+
+.filter {
+  margin: 0px 24px;
+}
+
+.order {
+  margin: 0px 24px;
+}
+
+.recipes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: #fdffeb;
+}

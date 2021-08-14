@@ -1,0 +1,26 @@
+.home-page {
+  background-image: url("https://lh3.googleusercontent.com/proxy/OoJseb6bPv9HlK7fNgXNtkxNVSzdozdEZullIL22MA6Dt4c3xZ3AngxcR62DRI01emY6g2w0wcPBksB06bNM-BM1utXJg-s7wmKwNBGjVcRbrWTptQyVG0YadAeEzw9OmyVPGhiahF7eAvk4DjpXt4F5KQVCx-nTrvOl1cIrF5Ma6hmd6KzMKZ07WtTrUw");
+  padding: 20em;
+  background-repeat: no-repeat;
+  outline: 20px solid black;
+  background-position: center;
+  background-size: cover;
+}
+
+#home-button {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #81b622;
+  padding: 40px 100px;
+  color: #fcf8ff;
+  font-size: 40px;
+  border-radius: 8px;
+  border-color: #ecf87f;
+  border-width: medium;
+  text-shadow: 2px 2px #3d550c;
+}
+
+#home-button:hover {
+  background-color: #ecf87f;
+  border-color: #81b622;
+  text-shadow: 2px 2px #3d550c;
+}

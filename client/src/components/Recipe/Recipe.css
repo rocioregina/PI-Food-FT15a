@@ -1,0 +1,44 @@
+.recipe {
+  margin: 20px;
+  width: 24rem;
+  height: 24rem;
+  margin: 12px;
+  background-color: #a3cb5c;
+  border-radius: 4px;
+}
+
+.recipe-body {
+  margin-top: 0px !important;
+  padding-top: 0px !important;
+}
+
+.recipe-title {
+  margin-left: 2rem;
+  margin-right: 2rem;
+  padding: 2px 12px;
+  text-shadow: 2px 2px #faffcf;
+  color: #3d550c;
+  text-align: center;
+  height: 25%;
+}
+
+#title {
+  text-decoration: none;
+}
+
+.recipe-image {
+  border-radius: 8px;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+.recipe-diets {
+  color: #3d550c;
+  margin: 0px 1rem;
+  text-align: center;
+  height: 20%;
+}
+
+.diet {
+  text-decoration: none;
+}

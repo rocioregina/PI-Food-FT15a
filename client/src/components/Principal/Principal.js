@@ -5,13 +5,14 @@ import React from "react";
 
 import SearchBar from '../SearchBar/SearchBar.js';
 import Recipes from '../Recipes/Recipes.js';
+import './Principal.js';
 // import FilterBy from '../FilterBy/FilterBy.js';
 // import OrderBy from '../OrderBy/OrderBy.js';
 // import Paginate from '../Paginate/Paginate.js';
 
 export default function Principal(){
   return (
-    <div>
+    <div className='principal'>
       <SearchBar/>
       <Recipes/>
     </div>
