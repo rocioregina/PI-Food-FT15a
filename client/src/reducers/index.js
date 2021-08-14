@@ -42,10 +42,9 @@ export default function rootReducer(state = initialState, action){
       return {
         ...state,
         recipesRender: state.recipesLoaded.filter((recipe) => {
-
-          console.log(recipe.diets.includes(action.payload), "1020012")
           console.log(recipe.diets)
-          return recipe.diets.includes(action.payload)
+          console.log(recipe.diets.some((e) => e.name === action.payload), "1020012")
+          return recipe.diets.some((e) => e.name === action.payload)
         })
       }
     }

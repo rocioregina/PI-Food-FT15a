@@ -64,7 +64,7 @@ export function Recipes(props){
 
   useEffect(() => { //filters a subArray to be rendered depending on the numeric button selected
     setSubArray(recipes.slice(9*state.num-9, 9*state.num))
-    console.log(recipes)
+    // console.log(recipes)
   }, [recipes, state])
 
   return (
