@@ -105,7 +105,7 @@ export function Recipes(props){
 
       <div className='paginate'>
         <button name="ant">Prev</button>
-        {buttons.map((num) => {return <button name="num" value={num} onClick={(e) => handleInputChange(e)}>{num}</button>})}
+          {buttons.map((num) => {return <button className='button' name="num" value={num} onClick={(e) => handleInputChange(e)}>{num}</button>})}
         <button name="sig">Next</button>
       </div>
     </div>

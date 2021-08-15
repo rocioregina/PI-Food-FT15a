@@ -1,0 +1,156 @@
+.create {
+  background-image: url('../../images/lettuce-background.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 12px;
+}
+
+.form-box {
+  background: linear-gradient(135deg, #ecf87f, #59981a);
+  width: 60%;
+  max-width: 1000px;
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+  padding: 8px;
+}
+
+.form-box .title {
+  font-size: 25px;
+  font-weight: 500;
+  position: relative;
+  color: #16442b;
+  margin: 8px;
+  padding-bottom: 8px;
+}
+
+.form-box .title::before{
+  content: '';
+  position: absolute;
+  left: 0; bottom: 0;
+  height: 3px; width: 30px;
+  background-color: #59981a;
+}
+
+form .container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.container .column .field{
+  width: 200px;
+}
+
+.column .field label{
+  font-weight: 600;
+  color: #193727;
+}
+
+.column .field input{
+  height: 32px;
+  width: 100%;
+  margin-top: 5px;
+  outline: none;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  padding-left: 15px;
+  font-size: 16px;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+
+.column .field input:focus,
+.column .field input:valid{
+  border-color: #59981a;
+}
+
+.column .field textarea{
+  resize: none;
+  height: 120px;
+  width: 100%;
+  margin-top: 5px;
+  outline: none;
+  border-radius: 4px;
+  border: 1px solid #59981a;
+  padding-left: 15px;
+  font-size: 16px;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+
+.column .field select{
+  width: 100%;
+  height: 28px;
+  margin-top: 5px;
+  outline: none;
+  border-radius: 4px;
+  border: 1px solid #59981a;
+  padding-left: 8px;
+  font-size: 16px;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+
+.column .field .diet-box{
+  background-color: #ffffff;
+  margin-top: 5px;
+  outline: none;
+  border-radius: 4px;
+  border: 1px solid #59981a;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+
+.field .diet-box ul{
+  list-style: none;
+}
+
+.diet-box ul li{
+  margin-bottom: 4px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.diet-box ul .remove-diet-button{
+  margin-left: 12px;
+}
+
+.field {
+  margin: 24px 24px;
+  position: relative;
+}
+
+.submit-button-box{
+  height: 45px;
+  margin: 24px 0;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+#submit-button {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  color: gray;
+  border: none;
+  border-radius: 3px;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  background-color: #f0f3ce;
+}
+
+#submit-button:valid {
+  background-color: #16442b;
+  transition: all 0.3s ease;
+  color: #f0f3ce;
+}
+
+#submit-button:valid:hover {
+  transition: all 0.3s ease;
+}

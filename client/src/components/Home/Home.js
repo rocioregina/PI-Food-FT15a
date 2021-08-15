@@ -8,7 +8,7 @@ export default function Home(){
     <div className='home-page'>
 
         <Link to='/recipes'>
-          <button id='home-button'>Enter</button>
+          <button id='home-button'>Start</button>
         </Link>
     </div>
   )

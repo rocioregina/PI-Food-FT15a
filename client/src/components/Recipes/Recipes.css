@@ -4,10 +4,22 @@
 
 .filter {
   margin: 0px 24px;
+  position: static;
 }
 
 .order {
   margin: 0px 24px;
+}
+
+.paginate {
+  margin: 4px 4px 4px 4px;
+  position: static;
+  bottom: 12px;
+}
+
+.button {
+  margin: 0 8px;
+  margin-bottom: 12px;
 }
 
 .recipes {

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 
 import { addRecipe, getDiets } from "../../actions/index.js";
 import { connect } from "react-redux";
+import './Create.css';
 
 export function Create(props){
   const [state, setState] = React.useState({
@@ -132,65 +133,96 @@ export function Create(props){
   }, [answer])
 
   return (
-    <div>
+    <div className='create'>
+      <div className='form-box'>
+      <div>
+        <h2 className='title'>Create Recipe</h2>
+      </div>
       <form onSubmit={(e) => {e.preventDefault(); handleSubmit()}}>
-        <label>Title</label>
-        <input classname={errors.title && "error"} name='title' value={state.title} onChange={handleInputChange}></input>
-        {errors.title && (<span classname="error">{errors.title}</span>)}
-        <p></p>
+      <div className='container'>
+        <div className='column'>
+          <div className='field'>
+            <label>Title</label>
+            <input className='input-box' placeholder='Title...' name='title' value={state.title} onChange={handleInputChange}></input>
+            {errors.title && (<span classname="error">{errors.title}</span>)}
+          </div>
 
-        <label>Summary</label>
-        <input classname={errors.title && "error"} name='summary' value={state.summary} onChange={handleInputChange}></input>
-        {errors.summary && (<span classname="error">{errors.summary}</span>)}
-        <p></p>
+          <div className='field'>
+            <label>Score</label>
+            <input className='input-box' name='spoonacularScore' placeholder='Score...' value={state.spoonacularScore} onChange={handleInputChange}></input>
+            {errors.spoonacularScore && (<span classname="error">{errors.spoonacularScore}</span>)}
+          </div>
 
-        <label>Score</label>
-        <input name='spoonacularScore' value={state.spoonacularScore} onChange={handleInputChange}></input>
-        {errors.spoonacularScore && (<span classname="error">{errors.spoonacularScore}</span>)}
-        <p></p>
+          <div className='field'>
+            <label>Health Level</label>
+            <input className='input-box' name='healthScore' placeholder='Health score...' value={state.healthScore} onChange={handleInputChange}></input>
+            {errors.healthScore && (<span classname="error">{errors.healthScore}</span>)}
+          </div>
 
-        <label>Health Level</label>
-        <input name='healthScore' value={state.healthScore} onChange={handleInputChange}></input>
-        {errors.healthScore && (<span classname="error">{errors.healthScore}</span>)}
-        <p></p>
+          <div className='field'>
+            <label>Image url</label>
+            <input className='input-box' name='image' placeholder='Image url...' value={state.image} onChange={handleInputChange}></input>
+            {errors.image && (<span classname="error">{errors.image}</span>)}
+          </div>
+        </div>
 
-        <label>Image url</label>
-        <input name='image' value={state.image} onChange={handleInputChange}></input>
-        {errors.image && (<span classname="error">{errors.image}</span>)}
-        <p></p>
+        <div className='column'>
 
-        <label>Diet types</label>
-        <select
-        name="diet-selector"
-        defaultValue="vegan"
-        onChange={handleSelection}>
-          {props.diets.map((diet) =>
-            {return <option value={diet.id}>{diet.name}</option>}
-          )}
-        </select>
-        {errors.diets && (<span classname="error">{errors.diets}</span>)}
-        <ul>
-          {state.diets.length !== 0 ? state.diets.map((diet) => {
-            var x = props.diets.find((e) => e.id === diet)
-            return <li>{x.name}
-              <button onClick={() => deleteThis(diet)}>x</button>
-            </li>
-          }) : []}
-        </ul>
+          <div className='field'>
+          <label>Summary</label>
+          <textarea className='input-box' placeholder='Summary...' name='summary' value={state.summary} onChange={handleInputChange}></textarea>
+          {errors.summary && (<span classname="error">{errors.summary}</span>)}
+          </div>
 
-        <label>Steps</label>
-        <button onClick={(e) => addStep(e)}>Add Step</button>
-        {state.analyzedInstructions.map((step, idx) => {
-          return (
-            <div key={idx}>
-            <input value={step} onChange={(e) => changeStep(e, idx)}></input>
-            <button onClick={() => removeStep(idx)}>Remove</button>
+          <div className='field'>
+            <label>Diet types</label>
+            <select
+            name="diet-selector"
+            defaultValue="vegan"
+            onChange={handleSelection}>
+              {props.diets.map((diet) =>
+                {return <option value={diet.id}>{diet.name}</option>}
+              )}
+            </select>
+            {errors.diets && (<span classname="error">{errors.diets}</span>)}
+          </div>
+
+          <div className='field'>
+            {state.diets.length !== 0 && <label>Selected diets:</label>}
+            <div className='diet-box'>
+            <ul>
+              {state.diets.length !== 0 ? state.diets.map((diet) => {
+                var x = props.diets.find((e) => e.id === diet)
+                return <li>{x.name}
+                  <button className='remove-diet-button' onClick={() => deleteThis(diet)}>x</button>
+                </li>
+              }) : []}
+            </ul>
             </div>
-          )
-        })}
+          </div>
+        </div>
 
-        {(Object.keys(errors).length < 1) ? <button type='submit'>Upload Recipe</button> : <button type='submit' disabled>Upload Recipe</button>}
+        <div className='column'>
+          <div className='field'>
+            <label>Steps</label>
+            <button onClick={(e) => addStep(e)}>Add Step</button>
+            {state.analyzedInstructions.map((step, idx) => {
+              return (
+                <div key={idx}>
+                <input placeholder={`Step ${idx+1}`} value={step} onChange={(e) => changeStep(e, idx)}></input>
+                <button onClick={() => removeStep(idx)}>Remove</button>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+        </div>
+
+        <div className='submit-button-box'>
+        {(Object.keys(errors).length < 1) ? <button id='submit-button' type='submit'>Upload Recipe</button> : <button id='submit-button' type='submit' disabled>Upload Recipe</button>}
+        </div>
       </form>
+      </div>
     </div>
   )
 };
