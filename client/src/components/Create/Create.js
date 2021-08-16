@@ -188,9 +188,10 @@ export function Create(props){
           </div>
 
           <div className='field'>
-            {state.diets.length !== 0 && <label>Selected diets:</label>}
+            <label>Selected diets:</label>
             <div className='diet-box'>
             <ul>
+              {state.diets.length === 0 && <li>No diets selected.</li>}
               {state.diets.length !== 0 ? state.diets.map((diet) => {
                 var x = props.diets.find((e) => e.id === diet)
                 return <li>{x.name}
@@ -205,15 +206,17 @@ export function Create(props){
         <div className='column'>
           <div className='field'>
             <label>Steps</label>
-            <button onClick={(e) => addStep(e)}>Add Step</button>
+            <button className='add-button' onClick={(e) => addStep(e)}>Add Step</button>
+            <div className='step-list'>
             {state.analyzedInstructions.map((step, idx) => {
               return (
                 <div key={idx}>
                 <input placeholder={`Step ${idx+1}`} value={step} onChange={(e) => changeStep(e, idx)}></input>
-                <button onClick={() => removeStep(idx)}>Remove</button>
+                <button onClick={() => removeStep(idx)}>x</button>
                 </div>
               )
             })}
+            </div>
           </div>
         </div>
         </div>

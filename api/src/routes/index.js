@@ -96,7 +96,8 @@ router.get("/recipes/:id", async function(req, res, next){
             healthScore: recipeAPI.data.healthScore,
             analyzedInstructions: recipeAPI.data.analyzedInstructions,
             image: recipeAPI.data.image,
-            diets: recipeAPI.data.diets
+            diets: recipeAPI.data.diets,
+            dishTypes: recipeAPI.data.dishTypes
         }
         return res.json(recipe);
       }

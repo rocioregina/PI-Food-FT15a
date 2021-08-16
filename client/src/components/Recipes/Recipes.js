@@ -70,29 +70,31 @@ export function Recipes(props){
 
   return (
     <div className='all'>
-      <div className='filter'>
-        <span>Filter by:</span>
-        <select
-          name="filter"
-          defaultValue="see-all"
-          value={state.filter}
-          onChange={(e) => filterBy(e.target.value)}>
-          {props.diets.map((diet) =>
-            {return <option value={diet.name}>{diet.name}</option>}
-          )}
-        </select>
-      </div>
+      <div className='selectors'>
+        <div className='filter'>
+          <span>Filter by:</span>
+          <select
+            name="filter"
+            defaultValue="see-all"
+            value={state.filter}
+            onChange={(e) => filterBy(e.target.value)}>
+            {props.diets.map((diet) =>
+              {return <option value={diet.name}>{diet.name}</option>}
+            )}
+          </select>
+        </div>
 
-      <div className='order'>
-        <span>Order by:</span>
-        <select name="order"
-            value={state.order} onChange={(e) => orderBy(e.target.value)}>
-          <option value="see-all">See all</option>
-          <option value="score-asc">Lowest Score</option>
-          <option value="score-desc">Higher Score</option>
-          <option value="alph-asc">A-Z</option>
-          <option value="alph-desc">Z-A</option>
-        </select>
+        <div className='order'>
+          <span>Order by:</span>
+          <select name="order"
+              value={state.order} onChange={(e) => orderBy(e.target.value)}>
+            <option value="see-all">See all</option>
+            <option value="score-asc">Lowest Score</option>
+            <option value="score-desc">Higher Score</option>
+            <option value="alph-asc">A-Z</option>
+            <option value="alph-desc">Z-A</option>
+          </select>
+        </div>
       </div>
 
       <div className='recipes'>
@@ -104,9 +106,7 @@ export function Recipes(props){
       </div>
 
       <div className='paginate'>
-        <button name="ant">Prev</button>
           {buttons.map((num) => {return <button className='button' name="num" value={num} onClick={(e) => handleInputChange(e)}>{num}</button>})}
-        <button name="sig">Next</button>
       </div>
     </div>
   )

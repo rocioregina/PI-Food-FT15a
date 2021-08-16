@@ -1,11 +1,29 @@
+.all-bar{
+  position: fixed;
+  display: flex;
+  justify-content: flex-start;
+  width: 20%;
+  left: -16%;
+  background-color: transparent;
+  transition: 450ms;
+}
+
+.all-bar-active {
+  left: 0;
+  transition: 450ms;
+  position: fixed;
+  display: flex;
+  justify-content: flex-start;
+  width: 18%;
+  background-color: transparent;
+}
+
 .navbar {
   background-color: #16442b;
-  height: 100%;
+  width: 20%;
+  height: 100vh;
   display: flex;
-  justify-content: start;
   align-items: center;
-  position: fixed;
-  width: 5%;
   border-bottom-right-radius: 20px;
   border-top-right-radius: 20px;
   box-shadow: 3px 0 10px rgba(0, 0, 0, 0.4);
@@ -16,11 +34,10 @@
 }
 
 .menu-bars {
-  margin-left: 12px;
-  font-size: 2rem;
   background: none;
   width: 40px;
-  color: #ecf87f;
+  color: #faffcf;
+  margin: auto 5px;
 }
 
 .close-icon {
@@ -30,28 +47,19 @@
 
 .nav-menu {
   background-color: #59981a;
-  width: 250px;
+  width: 80%;
   height: 100vh;
   display: flex;
   justify-content: center;
-  position: fixed;
-  left: -100%;
+  left: 0%;
   transition: 850ms;
   top: 0;
 }
 
-.nav-menu-active {
-  left: 0;
-  top: 0;
-  transition: 450ms;
-  background-color: #59981a;
-  width: 250px;
-  position: fixed;
-  height: 100vh;
-  box-shadow: 3px 0 10px rgba(0, 0, 0, 0.4);
-}
 
 .nav-menu-items {
+  margin: 0;
+  padding: 32px 0;
 }
 
 .nav-text {
@@ -61,6 +69,10 @@
   padding: 4px 8px 4px 0px;
   list-style: none;
   height: 60px;
+}
+
+.nav-text svg {
+  width: 40px;
 }
 
 .nav-text a {

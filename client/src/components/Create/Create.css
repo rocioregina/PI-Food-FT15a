@@ -84,7 +84,7 @@ form .container {
 }
 
 .column .field select{
-  width: 100%;
+  width: 108%;
   height: 28px;
   margin-top: 5px;
   outline: none;
@@ -104,6 +104,9 @@ form .container {
   border: 1px solid #59981a;
   border-bottom-width: 2px;
   transition: all 0.3s ease;
+  height: 100px;
+  overflow-y: scroll;
+  width: 215px;
 }
 
 .field .diet-box ul{
@@ -117,12 +120,48 @@ form .container {
 }
 
 .diet-box ul .remove-diet-button{
-  margin-left: 12px;
+  margin-left: 8px;
 }
 
 .field {
   margin: 24px 24px;
   position: relative;
+}
+
+.add-button {
+  border: 1px solid #556d3d;
+  border-radius: 4px;
+  outline: none;
+  color: #59981a;
+  margin-left: 5px;
+  font-weight: 600;
+  transition: all 0.1s ease;
+}
+
+.add-button:hover{
+  background-color: #59981a;
+  color: white;
+  transition: all 0.1s ease;
+}
+
+.step-list {
+  max-height: 400px;
+  overflow-y: scroll;
+}
+
+.step-list div {
+  display: flex;
+  justify-content: space-between;
+  margin: 4px;
+}
+
+.step-list input {
+  width: 80%;
+}
+
+.step-list button {
+  padding: 0 5px;
+  margin: 0 2px;
 }
 
 .submit-button-box{
@@ -147,10 +186,12 @@ form .container {
 
 #submit-button:valid {
   background-color: #16442b;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   color: #f0f3ce;
 }
 
 #submit-button:valid:hover {
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
+  background-color: #548721;
+  color: #16442b;
 }

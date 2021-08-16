@@ -9,25 +9,24 @@ export function SearchBar(props){
 
   return (
     <div className='searchbar'>
-      <div className='searchbar-body'>
-        <form onSubmit={(e) => {
-          e.preventDefault();
-          props.getRecipes(recipe);
-          }}>
-        <div className='searchbar-input'>
-          <input
-          className='input'
-          type="text"
-          placeholder="Recipe..."
-          value={recipe}
-          onChange={r => setRecipe(r.target.value)}
-          />
+      <form onSubmit={(e) => {
+        e.preventDefault();
+        props.getRecipes(recipe);
+        }}>
+        <div className='searchbar-body'>
+          <div className='searchbar-input'>
+            <input
+            type="text"
+            placeholder="Search recipes..."
+            value={recipe}
+            onChange={r => setRecipe(r.target.value)}
+            />
+          </div>
+          <div className='submit-button'>
+            <input type="submit" value="Search"/>
+          </div>
         </div>
-        <div className='submit-button'>
-          <input type="submit" value="Search"/>
-        </div>
-        </form>
-      </div>
+      </form>
     </div>
   )
 }
