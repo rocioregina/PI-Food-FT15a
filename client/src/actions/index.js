@@ -66,6 +66,10 @@ export function setRecipeOrder(order){
   }
 }
 
-// export function addRecipeFavorite(payload){
-//   return {type: "ADD_RECIPE_FAVORITE", payload: payload};
-// }
+export function addFavorite(payload){
+  return {type: "ADD_FAVORITE", payload: payload};
+}
+
+export function removeFavorite(payload){
+  return {type: "REMOVE_FAVORITE", payload: payload};
+}

@@ -1,0 +1,34 @@
+.favorites{
+  background-color: #fdffeb;
+}
+
+.favorites .fav-recipes{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.fav-recipes .recipe-box{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  position: static;
+}
+
+.recipe-box .remove-button{
+  max-width: 36px;
+  max-height: 36px;
+  color: #16442b;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  position: absolute;
+  margin-top:20px;
+  margin-right: 340px;
+  transition: all 0.2 ease;
+}
+
+.recipe-box .remove-button:hover{
+  color: #fdffeb;
+  transition: all 0.4 ease;
+}

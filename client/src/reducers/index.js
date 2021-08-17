@@ -3,7 +3,8 @@ const initialState = {
   recipesRender: [],
   dietsLoaded: [],
   recipeDetail: {},
-  postedRecipe: {default: true}
+  postedRecipe: {default: true},
+  favoriteRecipes: []
 };
 
 export default function rootReducer(state = initialState, action){
@@ -28,6 +29,16 @@ export default function rootReducer(state = initialState, action){
       return {
         ...state,
         dietsLoaded: action.payload
+      }
+    case "ADD_FAVORITE":
+      return {
+        ...state,
+        favoriteRecipes: state.favoriteRecipes.concat(action.payload)
+      }
+    case "REMOVE_FAVORITE":
+      return {
+        ...state,
+        favoriteRecipes: state.favoriteRecipes.filter((recipe) => recipe.id !== action.payload)
       }
     case "SET_FILTER":
       if(action.payload === "see all"){

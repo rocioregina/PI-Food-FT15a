@@ -71,3 +71,32 @@
   justify-content: center;
   background-color: #fdffeb;
 }
+
+.recipes .recipe-box{
+  display: inline-flex;
+  justify-content: center;
+  position: static;
+}
+
+.recipes .recipe-box button{
+  max-width: 32px;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  color: #16442b;
+  position: absolute;
+  margin-top: 356px;
+  margin-left: 330px;
+}
+
+.recipe-box button:hover{
+  color: #fdffeb;
+  transition: all 0.4 ease;
+}
+
+.recipe-box button:active{
+  color: yellow;
+  max-width: 56px;
+  max-height: 56px;
+  transition: all 2s ease;
+}
