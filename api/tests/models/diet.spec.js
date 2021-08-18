@@ -5,6 +5,9 @@ const { expect } = chai;
 chai.use(require('chai-as-promised'))
 
 describe("Diet model", () => {
+  beforeEach(() => {
+    Diet.sync({force: true});
+  });
   before(async() => {
     try {
       await conn.authenticate()
@@ -19,10 +22,6 @@ describe("Diet model", () => {
           .then(() => done(new Error("It requires a valid name")))
           .catch(() => done());
       });
-      it("Deberia retornar un error debido a que la dieta ya se encuentra en la base de datos", () => {
-        return expect(Diet.create({ name: "pescatarian" })).to.eventually.rejectedWith(Error);
-      });
-      
     });
   });
 });

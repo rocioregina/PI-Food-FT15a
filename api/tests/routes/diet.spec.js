@@ -40,15 +40,4 @@ describe("Recipe routes", () => {
         });
     });
   });
-  xdescribe("/recipes", () => {
-    it("deberia devolver la receta creada con un id en formato UUID", async () => {
-      const response = await agent
-        .post("/recipes")
-        .send({ title: "Vegetarian Paella", summary: "Typical dish from Spain", diets: ["dairy_free"] });
-      expect(response.status).to.eql(200);
-      const recipe = response.body;
-      expect(recipe.id).to.be.a.uuid();
-
-    });
-  });
 });
